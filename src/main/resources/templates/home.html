@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BestPlace / Главная страница</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+</head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
+
+<div class="row" th:insert="blocks/reservednumber :: numbers"></div>
+
+<div class="column row">
+    <hr>
+    <ul class="tabs" data-tabs id="example-tabs">
+        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Отзывы</a></li>
+        <li class="tabs-title"><a href="#panel2">Другие номера</a></li>
+    </ul>
+    <div th:insert="blocks/reviews :: reviews"></div>
+    <div th:insert="blocks/listnumbers :: listnumbers"></div>
+    </div>
+</div>
+
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>
