@@ -1,11 +1,21 @@
-<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="row">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text">Hostel BestPlace</li>
-                <li><a href="/login">Войти</a></li>
-                <li><a href="/registration">Зарегистрироваться</a></li>
             </ul>
         </div>
+        <ul class="menu" sec:authorize="isAnonymous()">
+            <li><a class="button" href="/login">Войти</a></li>
+            <li><a class="button" href="/registration">Зарегистрироваться</a></li>
+        </ul>
+        <ul class="menu" sec:authorize="isAuthenticated()">
+            <li><a th:text="${#authentication.name}"></a></li>
+            <li>
+                <form action="/logout" method="post">
+                    <input class="button" type="submit" value="Выйти"/>
+                </form>
+            </li>
+        </ul>
     </div>
 </div>

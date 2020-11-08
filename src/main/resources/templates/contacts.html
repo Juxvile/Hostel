@@ -1,24 +1,25 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>BestPlace / Контакты</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-</head>
+<head th:insert="blocks/heads :: heads"></head>
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
 <br>
 <div class="row column">
 
-    Тут надо написать контакты
+    <div>
+        <p>Наш адрес: Гродно, ул. Мицкевича 3</p>
+        <p>Наш телефон: +375(29) 123-45-67</p>
+        <p>Email: hostelbestplace@gmail.com</p>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d590.6866616994411!2d23.830511529272624!3d53.68714069294746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dfd6210385c161%3A0x3d17dec81ebf075e!2z0YPQuy4g0JzQuNGG0LrQtdCy0LjRh9CwIDMsINCT0YDQvtC00L3Qvg!5e0!3m2!1sru!2sby!4v1604734200362!5m2!1sru!2sby"
+            width="1170" height="650" frameborder="0"
+            style="border:0;"
+            allowfullscreen="" aria-hidden="false" tabindex="0">
+    </iframe>
 
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-    $(document).foundation();
-</script>
+<div th:insert="blocks/scripts :: scripts"></div>
 </body>
 </html>

@@ -1,24 +1,43 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>BestPlace / Про нас</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-</head>
+<head th:insert="blocks/heads :: heads"></head>
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
 <br>
 <div class="row column">
-
-Тут надо написать про нас
+    <div>
+        <div>
+            <p>Хостел – это недорогая гостиница европейского формата. Главное отличие хостелов от других видов гостиниц заключается в том, что душ и туалет в хостелах, как правило, находятся на этаже. Б
+        олее того, есть возможность снять кровать в общем номере, за счет чего значительно сэкономить на проживании.
+        Хостел – это не только место для проживания, но и образ жизни; интересная, захватывающая атмосфера непрекращающегося общения и новых знакомств.
+        Вопреки распространенному мнению, качественно выполненный хостел - это средство размещения, ничем не уступающее гостиничным комплексам, а зачастую, даже превосходящее их. Пример тому - хостел компании BestPlace, не раз становившиеся лучшими в Беларуси.
+            </p>
+        </div>
+        <div class="divImage">
+            <div class="thisDiv">
+                <img id="picture" class="image" th:src="@{~/static/pic/hostel1.jpg}">
+            </div>
+            <div class="thisDiv">
+                <img class="image" th:src="@{~/static/pic/hostel2.jpg}">
+            </div>
+            <div class="thisDiv">
+                <img class="image" th:src="@{~/static/pic/hostel3.jpg}">
+            </div>
+            <div class="thisDiv">
+                <img class="image" th:src="@{~/static/pic/hostel4.jpg}">
+            </div>
+            <div class="thisDiv">
+                <img class="image" th:src="@{~/static/pic/hostel5.jpg}">
+            </div>
+            <div class="thisDiv">
+                <img class="image" th:src="@{~/static/pic/hostel6.jpg}">
+            </div>
+        </div>
+    </div>
 
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-    $(document).foundation();
-</script>
+<div th:insert="blocks/scripts :: scripts"></div>
 </body>
 </html>

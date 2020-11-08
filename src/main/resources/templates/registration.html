@@ -1,19 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>BestPlace / Регистрация</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-</head>
+<head th:insert="blocks/heads :: heads"></head>
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
 <br>
 <div class="row column">
     <div>
+        <h4>Регистрация</h4>
         <form method="post">
-            <input type="text" name="username" placeholder="Введите имя пользователя" class="form-control" autocomplete="off"><br>
-            <input type="password" name="password" placeholder="Введите пароль" class="form-control" autocomplete="off"><br>
-            <input type="email" name="email" placeholder="Введите email" class="form-control" autocomplete="off"><br>
+            <input type="text" name="username" placeholder="Введите имя пользователя" autocomplete="off"><br>
+            <input type="password" name="password" placeholder="Введите пароль" autocomplete="off"><br>
+            <input type="email" name="email" placeholder="Введите email" autocomplete="off"><br>
             <input id="phone" type="text" name="phoneNumber" placeholder="Введите номер телефона" autocomplete="off"><br>
             <button type="submit" class="button">Зарегистрироватся</button>
         </form>
@@ -21,10 +18,6 @@
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-    $(document).foundation();
-</script>
+<div th:insert="blocks/scripts :: scripts"></div>
 </body>
 </html>

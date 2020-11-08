@@ -4,15 +4,11 @@
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
 <br>
-<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
-
-<div class="column row">
-    <div class="thisDiv">
-        <img id="picture" class="mainImage" th:src="@{~/static/pic/main.jpg}">
+<div class="row column">
+    <div style="font-size: 30px; text-align: center" th:text="${message}">
     </div>
+
 </div>
-
-
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
 
 <div th:insert="blocks/scripts :: scripts"></div>

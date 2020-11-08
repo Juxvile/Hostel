@@ -1,0 +1,26 @@
+.image {
+    width: 370px;
+    height: 300px;
+    min-width: auto;
+    min-height: auto;
+    margin: 10px;
+    z-index: 10;
+    position: relative;
+}
+.thisDiv{
+    display: inline-block; vertical-align: middle;
+    float: left;
+    position: relative;
+}
+.divImage {
+    margin: 0; justify-content: center; display: inline-block; width: 100%; float: left;
+}
+.mainImage{
+    width: 1150px;
+    height: 680px;
+    min-width: auto;
+    min-height: auto;
+    margin: 10px;
+    z-index: 10;
+    position: relative;
+}

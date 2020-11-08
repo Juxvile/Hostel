@@ -2,10 +2,7 @@ package com.example.hostel.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -20,4 +17,7 @@ public class Room {
     @NotBlank
     private Long maxPeople;
 
+//    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    private User user;
 }

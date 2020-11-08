@@ -2,6 +2,7 @@ package com.example.hostel.controller;
 
 import com.example.hostel.domain.User;
 import com.example.hostel.repos.UserRepository;
+import com.example.hostel.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class UserController {
 
     public final UserRepository userRepository;
+    public final UserService userService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -36,7 +38,7 @@ public class UserController {
             return "login";
 
         } else {
-            return "redirect:/home";
+            return "redirect:/";
         }
     }
 }
