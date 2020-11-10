@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @Entity
@@ -12,12 +14,27 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private Long roomNumber;
-    @NotBlank
-    private Long maxPeople;
+    @NotNull
+    private Integer roomNumber;
 
-//    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @NotNull
+    private Integer maxPeople;
+
+    @NotNull
+    private Integer rooms;
+
+    @NotBlank
+    private String description;
+
+    @NotNull
+    private Integer price;
+
+
+    @OneToMany
+    @JoinColumn(name = "room_id")
+    private Set <Reviews> reviews;
+
+    @OneToMany
+    private Set <DateRoom> dateRoom;
+
 }

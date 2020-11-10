@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/heads :: heads"></head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnavreserved :: upnavreserved"></div>
+
+<!--<div class="row" th:insert="blocks/number :: number"></div>-->
+<div class="column row">
+    <div class="row">
+        <div class="medium-6 columns">
+            <img class="thumbnail" src="https://placehold.it/650x350">
+            <div class="row small-up-4">
+                <div class="column">
+                    <img class="thumbnail" src="https://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="https://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="https://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="https://placehold.it/250x200">
+                </div>
+            </div>
+        </div>
+        <div class="medium-6 large-5 columns">
+            <h3 th:text="'Номер №' + ${number.roomNumber}"></h3><h4 style="opacity: 50%" th:text="${number.price} + '$'"></h4>
+            <form method="post">
+                <label>Количество человек
+                    <select name="countPeople">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </label>
+                <label>Дата заезда
+                    <input type="date" name="entryDate">
+                </label>
+                <label>Дата отъезда
+                    <input type="date" name="leaveDate">
+                </label>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="middle-label" class="middle">Комментарий</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="text" id="middle-label" name="comment" placeholder="Оставьте свое пожелание" maxlength="50">
+                    </div>
+                </div>
+                <button type="submit" class="button large expanded">Забронировать</button>
+            </form>
+        </div>
+    </div>
+
+<!--    <div th:text="${number.id}"></div>-->
+<!--    <div th:text="${number.rooms}"></div>-->
+<!--    <div th:text="${number.roomNumber}"></div>-->
+<!--    <div th:text="${number.maxPeople}"></div>-->
+<!--    <div th:text="${number.description}"></div>-->
+<!--    <hr>-->
+<!--    <ul class="tabs" data-tabs id="example-tabs">-->
+<!--        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Отзывы</a></li>-->
+<!--    </ul>-->
+    <div th:insert="blocks/reviews :: reviews"></div>
+</div>
+
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<div th:insert="blocks/scripts :: scripts"></div>
+</body>
+</html>

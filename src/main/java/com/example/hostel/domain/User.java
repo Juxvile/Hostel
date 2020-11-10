@@ -36,9 +36,13 @@ public class User implements UserDetails{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-//    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "room_id")
-//    private Room room;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_id")
+    private Room room;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_review")
+    private Set <Reviews> reviews;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

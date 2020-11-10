@@ -6,21 +6,17 @@
 <br>
 <div class="row columns" th:insert="blocks/upnav :: upnav"></div>
 
-<div class="row" th:insert="blocks/reservednumber :: numbers"></div>
-
-<div class="column row">
-    <hr>
-    <ul class="tabs" data-tabs id="example-tabs">
-        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Отзывы</a></li>
-        <li class="tabs-title"><a href="#panel2">Другие номера</a></li>
-    </ul>
-    <div th:insert="blocks/reviews :: reviews"></div>
-    <div th:insert="blocks/listnumbers :: listnumbers"></div>
+<div class="row column">
+    <div class="cell" th:each="room : ${numbers}">
+        <img class="thumbnail" src="https://placehold.it/350x200">
+        <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$'"></h6>
+        <p th:text="${room.description}"></p>
+        <a th:href="@{/numbers/${room.id}}" class="button hollow tiny expanded">Посмотреть</a>
+    </div>
 </div>
-
-
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
 
 <div th:insert="blocks/scripts :: scripts"></div>
 </body>
 </html>
+
