@@ -3,17 +3,18 @@ package com.example.hostel.controller;
 import com.example.hostel.domain.DateRoom;
 import com.example.hostel.domain.Room;
 import com.example.hostel.repos.RoomRepository;
+import com.example.hostel.services.DateRoomService;
 import com.example.hostel.services.RoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/numbers")
@@ -22,6 +23,7 @@ public class NumberController {
 
     public final RoomRepository roomRepository;
     public final RoomService roomService;
+    public final DateRoomService dateRoomService;
 
     @GetMapping("/add")
     public String addRoom(){
@@ -60,7 +62,7 @@ public class NumberController {
     @PostMapping("{id}")
     public String roomReserve (@Valid DateRoom dateRoom,
                             Model model){
-//        roomService.reserveRoom(room);
+        dateRoomService.reserveRoom(dateRoom);
         return "redirect:/";
     }
 

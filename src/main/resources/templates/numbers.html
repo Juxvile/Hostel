@@ -11,7 +11,7 @@
         <img class="thumbnail" src="https://placehold.it/350x200">
         <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$'"></h6>
         <p th:text="${room.description}"></p>
-        <a th:href="@{/numbers/${room.id}}" class="button hollow tiny expanded">Посмотреть</a>
+        <a th:value="${room}" th:href="@{|/numbers/${room.id}|}" class="button hollow tiny expanded">Посмотреть</a>
     </div>
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
