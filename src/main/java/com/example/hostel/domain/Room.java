@@ -30,11 +30,10 @@ public class Room {
     private Integer price;
 
 
-    @OneToMany
-    @JoinColumn(name = "room_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
     private Set <Reviews> reviews;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
     private Set <DateRoom> dateRoom;
 
 }

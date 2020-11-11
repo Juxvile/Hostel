@@ -13,18 +13,11 @@ import java.util.List;
 public class RoomService {
     public final RoomRepository roomRepository;
 
-//    public void reserveRoom (Room room){
-//        roomRepository.save(room);
-//    }
-
     public void saveRoom (Room room){
         roomRepository.save(room);
     }
 
     public List<Room> findAllRoom() {
-        Iterable<Room> rooms = roomRepository.findAll();
-        List<Room> roomList = new ArrayList<>();
-        rooms.forEach(roomList::add);
-        return roomList;
+        return roomRepository.findAll();
     }
 }

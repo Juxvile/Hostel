@@ -3,23 +3,24 @@ package com.example.hostel.controller;
 import com.example.hostel.domain.DateRoom;
 import com.example.hostel.domain.Reviews;
 import com.example.hostel.domain.Room;
+import com.example.hostel.domain.User;
 import com.example.hostel.repos.RoomRepository;
 import com.example.hostel.services.DateRoomService;
 import com.example.hostel.services.ReviewsService;
 import com.example.hostel.services.RoomService;
+import com.example.hostel.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
-@RequestMapping("/numbers")
+@RequestMapping(value = "/numbers")
 @RequiredArgsConstructor
 public class NumberController {
 
@@ -27,6 +28,7 @@ public class NumberController {
     public final RoomService roomService;
     public final DateRoomService dateRoomService;
     public final ReviewsService reviewsService;
+    public final UserService userService;
 
     @GetMapping("/add")
     public String addRoom(){
@@ -53,25 +55,35 @@ public class NumberController {
         model.addAttribute("numbers", roomService.findAllRoom());
         return "numbers";
     }
+
     @GetMapping("{id}")
     public String rooms(
             @PathVariable("id") Room room,
+            @AuthenticationPrincipal User user,
             Model model
     ) {
-        model.addAttribute("number", room);
+//        List<User> users = userService.users();
+        model.addAttribute("reviews", reviewsService.findByRoom(room));
+        model.addAttribute("user", user);
+        model.addAttribute("room", room);
         return "room";
     }
 
-    @PostMapping("{id}")
+    @PostMapping
     public String roomReview (@Valid Reviews reviews,
+                              @RequestParam(required=false,name="user") User user,
                               Model model){
+        model.addAttribute("reviews",reviews);
+        model.addAttribute("user", user);
         reviewsService.saveReview(reviews);
         return "redirect:/";
     }
 
     @PostMapping("{id}")
     public String roomReserve (@Valid DateRoom dateRoom,
+                            @AuthenticationPrincipal User user,
                             Model model){
+        model.addAttribute("user", user);
         dateRoomService.reserveRoom(dateRoom);
         return "redirect:/";
     }

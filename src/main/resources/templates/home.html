@@ -7,9 +7,11 @@
 <div class="row columns" th:insert="blocks/upnav :: upnav"></div>
 
 <div class="column row">
-    <div class="thisDiv">
-        <img id="picture" class="mainImage" th:src="@{~/static/pic/main.jpg}">
-    </div>
+        <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+            <img class="mainImage" th:src="@{~/static/pic/main.jpg}">
+<!--            <img class="mainImage" th:src="@{~/static/pic/wifi.jpg}">-->
+<!--            <img class="mainImage" th:src="@{~/static/pic/room.jpg}">-->
+        </div>
 </div>
 
 
