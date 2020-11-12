@@ -1,12 +1,15 @@
 package com.example.hostel.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Data
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Reviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +18,13 @@ public class Reviews {
     @NotBlank
     private String review;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

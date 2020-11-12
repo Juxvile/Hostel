@@ -61,8 +61,8 @@
         <div th:each="users : ${user}" th:value="${user.id}" class="tabs-panel is-active" id="panel1">
             <h4>Отзывы</h4>
             <div class="media-object stack-for-small">
-                <div th:each="review : ${reviews}"  class="media-object-section">
-                    <h5 th:text="${review.user}"></h5>
+                <div th:each="review : ${reviews}" class="panel callout radius">
+                    <h4 th:text="${review.user.username}"></h4>
                     <p th:text="${review.review}"></p>
                 </div>
             </div>

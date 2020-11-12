@@ -1,14 +1,18 @@
 package com.example.hostel.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
+
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +34,11 @@ public class Room {
     private Integer price;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <Reviews> reviews;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <DateRoom> dateRoom;
 
 }

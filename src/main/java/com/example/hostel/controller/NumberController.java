@@ -71,12 +71,10 @@ public class NumberController {
 
     @PostMapping
     public String roomReview (@Valid Reviews reviews,
-                              @RequestParam(required=false,name="user") User user,
                               Model model){
         model.addAttribute("reviews",reviews);
-        model.addAttribute("user", user);
         reviewsService.saveReview(reviews);
-        return "redirect:/";
+        return "redirect:/numbers/"+reviews.getRoom().getId();
     }
 
     @PostMapping("{id}")

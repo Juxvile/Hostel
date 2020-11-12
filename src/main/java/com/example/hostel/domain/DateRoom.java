@@ -1,15 +1,18 @@
 package com.example.hostel.domain;
 
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class DateRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +30,13 @@ public class DateRoom {
 
     private String comment;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 }
