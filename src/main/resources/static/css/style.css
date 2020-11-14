@@ -16,11 +16,20 @@
     margin: 0; justify-content: center; display: inline-block; width: 100%; float: left;
 }
 .mainImage{
-    width: 1150px;
+    width: 100%;
     height: 680px;
     min-width: auto;
     min-height: auto;
     margin: 10px;
     z-index: 10;
     position: relative;
+}
+.numberImage {
+    width: 380px;
+    height: 240px;
+}
+
+.bigNumberImage {
+    width: 650px;
+    height: 350px;
 }

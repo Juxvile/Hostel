@@ -4,6 +4,7 @@ import com.example.hostel.domain.User;
 import com.example.hostel.repos.UserRepository;
 import com.example.hostel.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,15 @@ public class UserController {
 
     public final UserRepository userRepository;
     public final UserService userService;
+
+    @GetMapping("/profile")
+    public String profile (
+            @AuthenticationPrincipal User user,
+            Model model){
+        model.addAttribute("user",user);
+        return "profile";
+    }
+
 
     @GetMapping("/login")
     public String login(Model model) {

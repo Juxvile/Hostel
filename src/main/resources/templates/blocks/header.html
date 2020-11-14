@@ -9,13 +9,22 @@
             <li><a class="button" href="/login">Войти</a></li>
             <li><a class="button" href="/registration">Зарегистрироваться</a></li>
         </ul>
-        <ul class="menu" sec:authorize="isAuthenticated()">
-            <li><a th:text="${#authentication.name}"></a></li>
+        <ul class="menu" style="float: right" sec:authorize="isAuthenticated()">
+            <li><a th:text="${#authentication.name}" href="/profile"></a></li>
             <li>
                 <form action="/logout" method="post">
                     <input class="button" type="submit" value="Выйти"/>
                 </form>
             </li>
         </ul>
+<!--        <ul class="menu" sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--            <li><a th:text="${#authentication.name}" href="/profile"></a></li>-->
+<!--            <li><a class="button" href="/numbers/add">Добавить комнату</a></li>-->
+<!--            <li>-->
+<!--                <form action="/logout" method="post">-->
+<!--                    <input class="button" type="submit" value="Выйти"/>-->
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
     </div>
 </div>

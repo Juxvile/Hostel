@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
@@ -29,6 +30,7 @@ public class DateRoom {
     private LocalDate leaveDate;
 
     private String comment;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)

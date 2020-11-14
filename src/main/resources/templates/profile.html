@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/heads :: heads"></head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
+
+<div class="row column">
+    <div class="cell" th:each="users : ${user}">
+        <label>Ваш никнейм</label>
+        <div class="panel callout radius">
+        <p th:text="${user.username}"></p>
+        </div>
+        <label>Ваш телефон</label>
+        <div class="panel callout radius">
+            <p th:text="${user.phoneNumber}"></p>
+        </div>
+        <label>Ваш email</label>
+        <div class="panel callout radius">
+            <p th:text="${user.email}"></p>
+        </div>
+    </div>
+</div>
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<div th:insert="blocks/scripts :: scripts"></div>
+</body>
+</html>
+

@@ -34,6 +34,9 @@ public class Room {
     private Integer price;
 
 
+    private String filename;
+
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <Reviews> reviews;
 

@@ -7,12 +7,14 @@
 <div class="row columns" th:insert="blocks/upnav :: upnav"></div>
 
 <div class="row column">
-    <form method="post">
-        <input type="text" name="roomNumber" placeholder="Номер комнаты">
-        <input type="text" name="maxPeople" placeholder="Максимальное количество человек">
-        <input type="text" name="rooms" placeholder="Количество комнат">
-        <input type="text" name="price" placeholder="Введите цену">
-        <textarea name="description" placeholder="Описание комнаты"></textarea>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="roomNumber" required placeholder="Номер комнаты">
+        <input type="text" name="maxPeople" required placeholder="Максимальное количество человек">
+        <input type="text" name="rooms" required placeholder="Количество комнат">
+        <input type="text" name="price" required placeholder="Введите цену">
+        <label>Фотографии комнаты</label>
+        <input type="file" name="file" accept=".jpg, .jpeg, .png" multiple="multiple">
+        <textarea name="description" required placeholder="Описание комнаты"></textarea>
         <button type="submit" class="button">Добавить комнату</button>
     </form>
 </div>
