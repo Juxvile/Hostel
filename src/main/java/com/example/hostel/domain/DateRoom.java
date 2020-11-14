@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,9 +25,12 @@ public class DateRoom {
     private Integer countPeople;
 
     @NotNull
+    @FutureOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryDate;
+
     @NotNull
+    @FutureOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate leaveDate;
 

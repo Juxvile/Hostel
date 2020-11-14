@@ -38,7 +38,11 @@
                     </select>
                 </label>
                 <label>Дата заезда
-                    <input type="date" name="entryDate" min="Today">
+<!--                    <input type="text" th:field="*{datePlanted}" />-->
+<!--                    <p th:if="${#fields.hasErrors('datePlanted')}" th:errors="*{datePlanted}">Incorrect date</p>-->
+<!--                    <p th:each="err : ${#fields.errors('entryDate')}" th:text="${err}"></p>-->
+                    <input type="date" name="entryDate">
+<!--                    <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{}">Incorrect date</p>-->
                 </label>
                 <label>Дата отъезда
                     <input type="date" name="leaveDate">

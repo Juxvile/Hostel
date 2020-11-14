@@ -36,6 +36,12 @@ public class Room {
 
     private String filename;
 
+//    private String filename2;
+//
+//    private String filename3;
+//
+//    private String filename4;
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <Reviews> reviews;

@@ -1,5 +1,6 @@
 package com.example.hostel.domain;
 
+
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,7 +44,7 @@ public class User implements UserDetails{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set <DateRoom> dateRoom;
 
-
+    // можно отрезать если нужно
     @OneToMany(fetch = FetchType.LAZY,  mappedBy = "user")
     private Set <Reviews> reviews;
 

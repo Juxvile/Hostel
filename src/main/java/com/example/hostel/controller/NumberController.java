@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
@@ -81,6 +82,10 @@ public class NumberController {
             @AuthenticationPrincipal User user,
             Model model
     ) {
+//        DateRoom dateRoom = new DateRoom();
+//        dateRoom.setUser(user);
+//        dateRoom.setRoom(room);
+//        model.addAttribute("dateRoom", dateRoom);
         model.addAttribute("reviews", reviewsService.findByRoom(room));
         model.addAttribute("user", user);
         model.addAttribute("room", room);
@@ -98,10 +103,16 @@ public class NumberController {
     @PostMapping("{id}")
     public String roomReserve (@Valid DateRoom dateRoom,
                             @AuthenticationPrincipal User user,
+                            BindingResult bindingResult,
                             Model model){
-        model.addAttribute("user", user);
-        dateRoomService.reserveRoom(dateRoom);
-        return "redirect:/";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("dateRoom", dateRoom);
+            return "numbers/{id}";
+        } else {
+            model.addAttribute("user", user);
+            dateRoomService.reserveRoom(dateRoom);
+            return "redirect:/";
+        }
     }
 
 }
