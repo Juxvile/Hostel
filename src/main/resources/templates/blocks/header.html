@@ -1,4 +1,5 @@
-<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="row">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
@@ -17,14 +18,8 @@
                 </form>
             </li>
         </ul>
-        <ul class="menu" sec:authorize="hasRole('ADMIN')">
-            <li><a th:text="${#authentication.name}" href="/profile"></a></li>
+        <ul class="menu" sec:authorize="hasAuthority('ADMIN')">
             <li><a class="button" href="/numbers/add">Добавить комнату</a></li>
-            <li>
-                <form action="/logout" method="post">
-                    <input class="button" type="submit" value="Выйти"/>
-                </form>
-            </li>
         </ul>
     </div>
 </div>

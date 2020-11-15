@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="blocks/heads :: heads"></head>
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
@@ -19,6 +19,10 @@
         <label>Ваш email</label>
         <div class="panel callout radius">
             <p th:text="${user.email}"></p>
+        </div>
+        <label>Статус</label>
+        <div class="panel callout radius">
+            <p sec:authentication="principal.authorities"></p>
         </div>
     </div>
 </div>
