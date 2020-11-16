@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
@@ -47,7 +48,7 @@ public class NumberController {
     @PostMapping("/add")
     public String addRoom(
             @Valid Room room,
-            @RequestParam("file") MultipartFile file,
+            @RequestParam("file") MultipartFile [] files,
             BindingResult bindingResult,
             Model model
     ) throws IOException {
@@ -59,12 +60,36 @@ public class NumberController {
             if(!uploadDir.exists()){
                 uploadDir.mkdirs();
             }
-            String uuidFile =  UUID.randomUUID().toString();
-            String resultFilename =  uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File (uploadPath + "/" + resultFilename));
-            room.setFilename(resultFilename);
-
-            roomService.saveRoom(room);
+//            String uuidFile =  UUID.randomUUID().toString();
+//            String resultFilename =  uuidFile + "." + file.getOriginalFilename();
+//            file.transferTo(new File (uploadPath + "/" + resultFilename));
+//            room.setFilename(resultFilename);
+//            roomService.saveRoom(room);
+            int count = 0;
+            for (MultipartFile file : files){
+                String uuidFile =  UUID.randomUUID().toString();
+                String resultFilename =  uuidFile + "." + file.getOriginalFilename();
+                file.transferTo(new File (uploadPath + "/" + resultFilename));
+                switch (count){
+                    case(0):
+                        room.setFilename(resultFilename);
+                        break;
+                    case(1):
+                        room.setFilename2(resultFilename);
+                        break;
+                    case(2):
+                        room.setFilename3(resultFilename);
+                        break;
+                    case(3):
+                        room.setFilename4(resultFilename);
+                        break;
+                    case(4):
+                        room.setFilename5(resultFilename);
+                        break;
+                }
+                count++;
+                roomService.saveRoom(room);
+            }
             return "redirect:/numbers";
         }
     }
@@ -81,10 +106,10 @@ public class NumberController {
             @AuthenticationPrincipal User user,
             Model model
     ) {
-//        DateRoom dateRoom = new DateRoom();
-//        dateRoom.setUser(user);
-//        dateRoom.setRoom(room);
-//        model.addAttribute("dateRoom", dateRoom);
+        DateRoom dateRoom = new DateRoom();
+        dateRoom.setUser(user);
+        dateRoom.setRoom(room);
+        model.addAttribute("dateRoom", dateRoom);
         model.addAttribute("reviews", reviewsService.findByRoom(room));
         model.addAttribute("user", user);
         model.addAttribute("room", room);
@@ -100,18 +125,26 @@ public class NumberController {
     }
 
     @PostMapping("{id}")
-    public String roomReserve (@Valid DateRoom dateRoom,
-                            @AuthenticationPrincipal User user,
-                            BindingResult bindingResult,
-                            Model model){
+    public String roomReserve (
+                               @Valid DateRoom dateRoom,
+                               BindingResult bindingResult,
+                               Model model,
+                               @PathVariable("id") Room room,
+                               @AuthenticationPrincipal User user
+    ){
         if (bindingResult.hasErrors()) {
             model.addAttribute("dateRoom", dateRoom);
-            return "numbers/{id}";
-        } else {
             model.addAttribute("user", user);
-            dateRoomService.reserveRoom(dateRoom);
+            model.addAttribute("reviews", reviewsService.findByRoom(room));
+            model.addAttribute("room", room);
+            return "room";
+        } else {
+            dateRoom.setUser(user);
+            dateRoom.setRoom(room);
+            if (room.getMaxPeople() - dateRoom.getCountPeople() > 0){
+                dateRoomService.reserveRoom(dateRoom);
+            }
             return "redirect:/";
         }
     }
-
 }

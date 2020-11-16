@@ -36,11 +36,14 @@ public class Room {
 
     private String filename;
 
-//    private String filename2;
-//
-//    private String filename3;
-//
-//    private String filename4;
+    private String filename2;
+
+    private String filename3;
+
+    private String filename4;
+
+    private String filename5;
+
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")

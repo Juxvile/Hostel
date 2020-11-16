@@ -7,3 +7,15 @@ $( function() {
 } );
 
 $(document).foundation();
+
+const input = document.querySelector('input');
+
+input.addEventListener('change', (event) => {
+    const nowDate = Date.now();
+    const inputDate = Date.parse(input.value)
+    if (nowDate > inputDate ) {
+        console.log('Уже в прошлом')
+        return}
+    console.log("будующее")
+    return
+});

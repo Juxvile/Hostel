@@ -12,22 +12,22 @@
             <img class="bigNumberImage thumbnail" th:src="@{|/static/img/${room.filename}|}">
             <div class="row small-up-4">
                 <div class="column">
-                    <img class="thumbnail" src="https://placehold.it/250x200">
+                    <img class="thumbnail smallImage" th:src="@{|/static/img/${room.filename2}|}">
                 </div>
                 <div class="column">
-                    <img class="thumbnail" src="https://placehold.it/250x200">
+                    <img class="thumbnail smallImage" th:src="@{|/static/img/${room.filename3}|}">
                 </div>
                 <div class="column">
-                    <img class="thumbnail" src="https://placehold.it/250x200">
+                    <img class="thumbnail smallImage" th:src="@{|/static/img/${room.filename4}|}">
                 </div>
                 <div class="column">
-                    <img class="thumbnail" src="https://placehold.it/250x200">
+                    <img class="thumbnail smallImage" th:src="@{|/static/img/${room.filename5}|}">
                 </div>
             </div>
         </div>
         <div class="medium-6 large-5 columns">
             <h3 th:text="'Номер №' + ${room.roomNumber}"></h3><h4 style="opacity: 50%" th:text="${room.price} + '$'"></h4>
-            <form method="post" id="form1">
+            <form method="post" id="form1" th:object="${dateRoom}">
                 <label>Количество человек
                     <select name="countPeople">
                         <option>1</option>
@@ -41,11 +41,12 @@
 <!--                    <input type="text" th:field="*{datePlanted}" />-->
 <!--                    <p th:if="${#fields.hasErrors('datePlanted')}" th:errors="*{datePlanted}">Incorrect date</p>-->
 <!--                    <p th:each="err : ${#fields.errors('entryDate')}" th:text="${err}"></p>-->
-                    <input type="date" name="entryDate">
-<!--                    <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{}">Incorrect date</p>-->
+                    <input type="date" name="entryDate" th:field="*{entryDate}">
+                    <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{entryDate}"></p>
                 </label>
                 <label>Дата отъезда
-                    <input type="date" name="leaveDate">
+                    <input type="date" name="leaveDate" th:field="*{leaveDate}">
+                    <p th:if="${#fields.hasErrors('leaveDate')}" th:errors="*{leaveDate}"></p>
                 </label>
                 <div class="row">
                     <div class="small-3 columns">
@@ -55,8 +56,8 @@
                         <input type="text" id="middle-label" name="comment" placeholder="Оставьте свое пожелание" maxlength="50">
                     </div>
                 </div>
-                <input type="hidden" name="room" th:value="${room.id}">
-                <input type="hidden" name="user" th:value="${user.id}">
+<!--                <input type="hidden" name="room" th:value="${room.id}">-->
+<!--                <input type="hidden" name="user" th:value="${user.id}">-->
                 <button type="submit" class="button large expanded">Забронировать</button>
             </form>
         </div>
