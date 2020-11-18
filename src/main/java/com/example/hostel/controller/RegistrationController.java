@@ -27,8 +27,9 @@ public class RegistrationController {
             @RequestParam(name = "editUser", required = false, defaultValue = "") User user,
             Model model
     ){
-        model.addAttribute("user", user);
-
+//        User user1 = new User();
+        model.addAttribute("user", user); // тут можно вернуть на user и удалить верхнюю строчку (new User), либо вернуть её и поставить тут user1
+        model.addAttribute("users", userService.users());
         return "registration";
     }
 

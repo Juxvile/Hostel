@@ -77,6 +77,11 @@
 		<!--            <version>6.1.5.Final</version>-->
 		<!--        </dependency>-->
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.6.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
@@ -106,6 +111,23 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>5.2.8.RELEASE</version>
 		</dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+        <!--		<dependency>-->
+<!--			<groupId>org.springframework.retry</groupId>-->
+<!--			<artifactId>spring-retry</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-aop</artifactId>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>

@@ -1,7 +1,9 @@
 package com.example.hostel.domain;
 
 
+import com.example.hostel.validation.UniqueUsername;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@UniqueUsername(message = "Такое имя уже есть")
 public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

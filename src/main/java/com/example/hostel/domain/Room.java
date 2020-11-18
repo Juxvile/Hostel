@@ -3,6 +3,7 @@ package com.example.hostel.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -22,6 +23,7 @@ public class Room {
     private Integer roomNumber;
 
     @NotNull
+    @Min(0)
     private Integer maxPeople;
 
     @NotNull
