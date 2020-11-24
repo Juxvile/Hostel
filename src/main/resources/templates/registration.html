@@ -8,6 +8,7 @@
     <div>
         <h4>Регистрация</h4>
         <form method="post" id="form3">
+            <p th:text="${message}"></p>
             <input type="text" name="username" placeholder="Введите имя пользователя" autocomplete="off"><br>
             <input type="password" name="password" required placeholder="Введите пароль" autocomplete="off"><br>
             <input type="email" name="email" required placeholder="Введите email" autocomplete="off"><br>

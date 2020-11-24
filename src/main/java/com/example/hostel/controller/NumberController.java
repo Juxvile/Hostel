@@ -4,6 +4,7 @@ import com.example.hostel.domain.DateRoom;
 import com.example.hostel.domain.Reviews;
 import com.example.hostel.domain.Room;
 import com.example.hostel.domain.User;
+import com.example.hostel.repos.DateRoomRepository;
 import com.example.hostel.repos.RoomRepository;
 import com.example.hostel.services.DateRoomService;
 import com.example.hostel.services.ReviewsService;
@@ -31,6 +32,7 @@ public class NumberController {
     public final RoomRepository roomRepository;
     public final RoomService roomService;
     public final DateRoomService dateRoomService;
+    public final DateRoomRepository dateRoomRepository;
     public final ReviewsService reviewsService;
     public final UserService userService;
 
@@ -123,19 +125,20 @@ public class NumberController {
         return "redirect:/numbers/"+reviews.getRoom().getId();
     }
 
-    @PostMapping("{id}")
+    @PostMapping("{user_id}")
     public String roomReserve (
-                               @Valid DateRoom dateRoom,
-                               BindingResult bindingResult,
-                               Model model,
-                               @PathVariable("id") Room room,
-                               @AuthenticationPrincipal User user
+            @Valid DateRoom dateRoom,
+            BindingResult bindingResult,
+            Model model,
+            @PathVariable("user_id") Room room,
+            @AuthenticationPrincipal User user
     ){
         if (bindingResult.hasErrors()) {
             model.addAttribute("dateRoom", dateRoom);
             model.addAttribute("user", user);
             model.addAttribute("reviews", reviewsService.findByRoom(room));
             model.addAttribute("room", room);
+            model.addAttribute("message", "");
             return "room";
         } else {
             if (dateRoom.getEntryDate().isAfter(dateRoom.getLeaveDate())) {
@@ -143,13 +146,36 @@ public class NumberController {
                 model.addAttribute("user", user);
                 model.addAttribute("reviews", reviewsService.findByRoom(room));
                 model.addAttribute("room", room);
+                model.addAttribute("message", "Введите корректную дату отьезда");
                 return "room";
             } else {
-                dateRoom.setUser(user);
-                dateRoom.setRoom(room);
-                dateRoomService.reserveRoom(dateRoom);
-                return "redirect:/";
+//                DateRoom dateRoom1 = new DateRoom();
+//                if (dateRoom.getEntryDate().isAfter(dateRoomRepository.findByEntryDate())
+//                        || dateRoom.getLeaveDate().isBefore(dateRoom.getLeaveDate())
+//                ){
+//                dateRoomService.freeCheck(dateRoom.getEntryDate());
+//                DateRoom dateRoom1 = new DateRoom();
+//                dateRoom1.setEntryDate(dateRoom.getEntryDate());
+//                dateRoom1.setLeaveDate(dateRoom.getLeaveDate());
+
+
+//                dateRoomRepository.findByEntryDateBetweenAndLeaveDate(dateRoom,dateRoom);
+
+
+
+                dateRoomService.reserveRoom(dateRoom, user, room);
+//                } else {
+//                    if (dateRoom.getEntryDate().isAfter(dateRoom.getLeaveDate())) {
+//                        model.addAttribute("dateRoom", dateRoom);
+//                        model.addAttribute("user", user);
+//                        model.addAttribute("reviews", reviewsService.findByRoom(room));
+//                        model.addAttribute("room", room);
+//                        model.addAttribute("message2", "На эту дату номер уже забронирован");
+//                        return "room";
+//                    }
             }
+            return "redirect:/";
+//        }
         }
     }
 }

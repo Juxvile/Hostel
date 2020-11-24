@@ -1,9 +1,11 @@
 package com.example.hostel.domain;
 
 
+import com.example.hostel.validation.UniqueEmail;
 import com.example.hostel.validation.UniqueUsername;
-import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +20,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@UniqueEmail(message = "Такой email уже есть")
 @UniqueUsername(message = "Такое имя уже есть")
 public class User implements UserDetails{
     @Id

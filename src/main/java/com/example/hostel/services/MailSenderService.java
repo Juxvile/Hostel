@@ -26,3 +26,7 @@ public class MailSenderService {
         javaMailSender.send(simpleMailMessage);
     }
 }
+
+
+
+

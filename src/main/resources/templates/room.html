@@ -28,6 +28,7 @@
         <div class="medium-6 large-5 columns">
             <h3 th:text="'Номер №' + ${room.roomNumber}"></h3><h4 style="opacity: 50%" th:text="${room.price} + '$'"></h4>
             <form method="post" id="form1" th:object="${dateRoom}">
+<!--                <input type="text" name="id">-->
                 <label>Количество человек
                     <select name="countPeople">
                         <option>1</option>
@@ -45,6 +46,7 @@
                     <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{entryDate}"></p>
                 </label>
                 <label>Дата отъезда
+                    <p th:text="${message}"></p>
                     <input type="date" name="leaveDate" th:field="*{leaveDate}">
                     <p th:if="${#fields.hasErrors('leaveDate')}" th:errors="*{leaveDate}"></p>
                 </label>

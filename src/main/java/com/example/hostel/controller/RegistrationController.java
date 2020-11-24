@@ -27,8 +27,7 @@ public class RegistrationController {
             @RequestParam(name = "editUser", required = false, defaultValue = "") User user,
             Model model
     ){
-//        User user1 = new User();
-        model.addAttribute("user", user); // тут можно вернуть на user и удалить верхнюю строчку (new User), либо вернуть её и поставить тут user1
+        model.addAttribute("user", user);
         model.addAttribute("users", userService.users());
         return "registration";
     }
@@ -44,8 +43,8 @@ public class RegistrationController {
             model.mergeAttributes(errorsMap);
             model.addAttribute("user", user);
             model.addAttribute("users", userService.users());
-            userService.addUser(user);
-            return "mailsend";
+            model.addAttribute("message", "Такой пользователь либо email уже существует");
+            return "registration";
         } else {
             userService.addUser(user);
             return "redirect:/mailsend";
