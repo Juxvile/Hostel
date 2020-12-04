@@ -17,16 +17,20 @@ public class DateRoomService {
     public final DateRoomRepository dateRoomRepository;
     public final RoomRepository roomRepository;
 
-    public void reserveRoom(DateRoom dateRoom, User user, Room room){
-        dateRoom.setUser(user);
-        dateRoom.setRoom(room);
-        dateRoomRepository.save(dateRoom);
-    }
-
-
-    public List<DateRoom> findAllDateRoom() {
+    public List<DateRoom> dateRooms(){
         return dateRoomRepository.findAll();
     }
 
+    public boolean reserveRoom(DateRoom dateRoom, User user, Room room){
+        dateRoom.setUser(user);
+        dateRoom.setRoom(room);
+        boolean datesEmpty = dateRoomRepository.findAllBetweenDates(dateRoom.getEntryDate(), dateRoom.getLeaveDate()).isEmpty();
+        if (datesEmpty) {
+            dateRoomRepository.save(dateRoom);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 

@@ -28,7 +28,6 @@
         <div class="medium-6 large-5 columns">
             <h3 th:text="'Номер №' + ${room.roomNumber}"></h3><h4 style="opacity: 50%" th:text="${room.price} + '$'"></h4>
             <form method="post" id="form1" th:object="${dateRoom}">
-<!--                <input type="text" name="id">-->
                 <label>Количество человек
                     <select name="countPeople">
                         <option>1</option>
@@ -39,9 +38,6 @@
                     </select>
                 </label>
                 <label>Дата заезда
-<!--                    <input type="text" th:field="*{datePlanted}" />-->
-<!--                    <p th:if="${#fields.hasErrors('datePlanted')}" th:errors="*{datePlanted}">Incorrect date</p>-->
-<!--                    <p th:each="err : ${#fields.errors('entryDate')}" th:text="${err}"></p>-->
                     <input type="date" name="entryDate" th:field="*{entryDate}">
                     <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{entryDate}"></p>
                 </label>
@@ -58,8 +54,6 @@
                         <input type="text" id="middle-label" name="comment" placeholder="Оставьте свое пожелание" maxlength="50">
                     </div>
                 </div>
-<!--                <input type="hidden" name="room" th:value="${room.id}">-->
-<!--                <input type="hidden" name="user" th:value="${user.id}">-->
                 <button type="submit" class="button large expanded">Забронировать</button>
             </form>
         </div>

@@ -10,10 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,12 +21,10 @@ public class RegistrationController {
     public final UserService userService;
 
     @GetMapping("/registration")
-    public String registration(
-            @RequestParam(name = "editUser", required = false, defaultValue = "") User user,
-            Model model
+    public String registration(User user,
+                               Model model
     ){
         model.addAttribute("user", user);
-        model.addAttribute("users", userService.users());
         return "registration";
     }
 
@@ -39,17 +35,14 @@ public class RegistrationController {
             Model model
     ){
         if (bindingResult.hasErrors()){
-            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-            model.mergeAttributes(errorsMap);
             model.addAttribute("user", user);
-            model.addAttribute("users", userService.users());
-            model.addAttribute("message", "Такой пользователь либо email уже существует");
             return "registration";
         } else {
             userService.addUser(user);
             return "redirect:/mailsend";
         }
     }
+
     @GetMapping("/mailsend")
     public String mailSendPage(
             Model model

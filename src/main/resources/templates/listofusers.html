@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/heads :: heads"></head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
+
+<div class="row column" th:name="${user}" th:each="user : ${users}">
+    <div class="panel callout radius" style="border: 3px solid aquamarine">
+        <label>
+            <p>Id пользователя</p>
+        </label>
+        <p class="panel callout radius" th:text="${user.id}"></p>
+        <label>
+            <p>Имя пользователя</p>
+        </label>
+        <p class="panel callout radius" th:text="${user.username}"></p>
+        <label>
+            <p>Телефон пользователя</p>
+        </label>
+        <p class="panel callout radius" th:text="${user.phoneNumber}"></p>
+        <label>
+            <p>Email пользователя</p>
+        </label>
+        <p class="panel callout radius" th:text="${user.email}"></p>
+        <form method="post" th:action="'/listofusers/' + ${user.id} + '/remove'">
+            <button type="submit" class="button" style="float: right">
+                Удалить пользователя
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<div th:insert="blocks/scripts :: scripts"></div>
+</body>
+</html>

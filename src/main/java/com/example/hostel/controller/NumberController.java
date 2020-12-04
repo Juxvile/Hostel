@@ -41,7 +41,7 @@ public class NumberController {
 
 
     @GetMapping("/add")
-    public String addRoom(){
+    public String addRoom()  {
         return "addroom";
     }
 
@@ -49,42 +49,37 @@ public class NumberController {
     @PostMapping("/add")
     public String addRoom(
             @Valid Room room,
-            @RequestParam("file") MultipartFile [] files,
+            @RequestParam("file") MultipartFile[] files,
             BindingResult bindingResult,
             Model model
     ) throws IOException {
-        if (bindingResult.hasErrors()){
-            model.addAttribute("room",room);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("room", room);
             return "addroom";
         } else {
             File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
-//            String uuidFile =  UUID.randomUUID().toString();
-//            String resultFilename =  uuidFile + "." + file.getOriginalFilename();
-//            file.transferTo(new File (uploadPath + "/" + resultFilename));
-//            room.setFilename(resultFilename);
-//            roomService.saveRoom(room);
             int count = 0;
-            for (MultipartFile file : files){
-                String uuidFile =  UUID.randomUUID().toString();
-                String resultFilename =  uuidFile + "." + file.getOriginalFilename();
-                file.transferTo(new File (uploadPath + "/" + resultFilename));
-                switch (count){
-                    case(0):
+            for (MultipartFile file : files) {
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + file.getOriginalFilename();
+                file.transferTo(new File(uploadPath + "/" + resultFilename));
+                switch (count) {
+                    case (0):
                         room.setFilename(resultFilename);
                         break;
-                    case(1):
+                    case (1):
                         room.setFilename2(resultFilename);
                         break;
-                    case(2):
+                    case (2):
                         room.setFilename3(resultFilename);
                         break;
-                    case(3):
+                    case (3):
                         room.setFilename4(resultFilename);
                         break;
-                    case(4):
+                    case (4):
                         room.setFilename5(resultFilename);
                         break;
                 }
@@ -103,13 +98,11 @@ public class NumberController {
 
     @GetMapping("{id}")
     public String rooms(
+            DateRoom dateRoom,
             @PathVariable("id") Room room,
             @AuthenticationPrincipal User user,
             Model model
     ) {
-        DateRoom dateRoom = new DateRoom();
-        dateRoom.setUser(user);
-        dateRoom.setRoom(room);
         model.addAttribute("dateRoom", dateRoom);
         model.addAttribute("reviews", reviewsService.findByRoom(room));
         model.addAttribute("user", user);
@@ -118,21 +111,21 @@ public class NumberController {
     }
 
     @PostMapping
-    public String roomReview (@Valid Reviews reviews,
-                              Model model){
-        model.addAttribute("reviews",reviews);
+    public String roomReview(@Valid Reviews reviews,
+                             Model model) {
+        model.addAttribute("reviews", reviews);
         reviewsService.saveReview(reviews);
-        return "redirect:/numbers/"+reviews.getRoom().getId();
+        return "redirect:/numbers/" + reviews.getRoom().getId();
     }
 
-    @PostMapping("{user_id}")
-    public String roomReserve (
+    @PostMapping("{id}")
+    public String roomReserve(
             @Valid DateRoom dateRoom,
             BindingResult bindingResult,
             Model model,
-            @PathVariable("user_id") Room room,
+            @PathVariable("id") Room room,
             @AuthenticationPrincipal User user
-    ){
+    ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("dateRoom", dateRoom);
             model.addAttribute("user", user);
@@ -148,34 +141,16 @@ public class NumberController {
                 model.addAttribute("room", room);
                 model.addAttribute("message", "Введите корректную дату отьезда");
                 return "room";
+            } else if (!dateRoomService.reserveRoom(dateRoom, user, room)) {
+                model.addAttribute("dateRoom", dateRoom);
+                model.addAttribute("user", user);
+                model.addAttribute("reviews", reviewsService.findByRoom(room));
+                model.addAttribute("room", room);
+                model.addAttribute("message", "На данную дату номер уже забронирован");
+                return "room";
             } else {
-//                DateRoom dateRoom1 = new DateRoom();
-//                if (dateRoom.getEntryDate().isAfter(dateRoomRepository.findByEntryDate())
-//                        || dateRoom.getLeaveDate().isBefore(dateRoom.getLeaveDate())
-//                ){
-//                dateRoomService.freeCheck(dateRoom.getEntryDate());
-//                DateRoom dateRoom1 = new DateRoom();
-//                dateRoom1.setEntryDate(dateRoom.getEntryDate());
-//                dateRoom1.setLeaveDate(dateRoom.getLeaveDate());
-
-
-//                dateRoomRepository.findByEntryDateBetweenAndLeaveDate(dateRoom,dateRoom);
-
-
-
-                dateRoomService.reserveRoom(dateRoom, user, room);
-//                } else {
-//                    if (dateRoom.getEntryDate().isAfter(dateRoom.getLeaveDate())) {
-//                        model.addAttribute("dateRoom", dateRoom);
-//                        model.addAttribute("user", user);
-//                        model.addAttribute("reviews", reviewsService.findByRoom(room));
-//                        model.addAttribute("room", room);
-//                        model.addAttribute("message2", "На эту дату номер уже забронирован");
-//                        return "room";
-//                    }
+                return "redirect:/";
             }
-            return "redirect:/";
-//        }
         }
     }
 }
