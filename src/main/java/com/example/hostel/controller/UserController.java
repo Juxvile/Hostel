@@ -7,9 +7,7 @@ import com.example.hostel.repos.UserRepository;
 import com.example.hostel.services.DateRoomService;
 import com.example.hostel.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,10 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,18 +66,13 @@ public class UserController {
         List <DateRoom> dateRooms = dateRoomService.dateRooms();
         model.addAttribute("users", users);
         model.addAttribute("dateRooms", dateRooms);
+        model.addAttribute("message1", "");
         return "listofusers";
     }
 
     @PostMapping("/listofusers/{id}/remove")
-    public String deleteUser(@PathVariable (value = "id") long id,
-                             Model model
-    ){
-        List <User> users = userService.users();
-        model.addAttribute("users", users);
-        User user1 = userRepository.findById(id);
-        userRepository.delete(user1);
-
-        return "listofusers";
+    public String deleteUser(@PathVariable(value = "id") long id){
+            userService.deleteUser(id);
+            return "redirect:/listofusers";
     }
 }

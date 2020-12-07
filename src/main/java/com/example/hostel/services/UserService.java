@@ -10,7 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,7 +38,7 @@ public class UserService  implements UserDetailsService {
 
             String message = String.format(
                     "Привет, %s! \n" +
-                            "Спасибо что выбрали BestPlace. " +
+                            "Спасибо что выбрали Royal Blood. " +
                             "Перейдите по ссылке чтобы активировать пользователя http://localhost:8082/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
@@ -96,8 +98,8 @@ public class UserService  implements UserDetailsService {
     }
 
 
-    public void deleteUser(User user){
+    public void deleteUser(@PathVariable(value = "id") long id){
+        User user = userRepository.findById(id);
         userRepository.delete(user);
     }
-
 }
