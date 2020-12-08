@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -153,4 +154,17 @@ public class NumberController {
             }
         }
     }
+
+//    @GetMapping("/listofnumbers")
+//    public String listOfNumbers (Model model){
+//        List <Room> roomList = roomService.findAllRoom();
+//        model.addAttribute("rooms", roomList);
+//        return "listofnumbers";
+//    }
+//
+//    @PostMapping("/listofnumbers/{id}/remove")
+//    public String deleteRoom(@PathVariable(value = "id") long id){
+//        roomService.deleteRoom(id);
+//        return "redirect:/listofnumbers";
+//    }
 }
