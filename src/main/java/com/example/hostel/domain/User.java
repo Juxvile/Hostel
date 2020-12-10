@@ -40,6 +40,9 @@ public class User implements UserDetails{
 
     private String activationCode;
 
+    private transient String usernameAgain;
+    private transient String phoneNumberAgain;
+    private transient String emailAgain;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

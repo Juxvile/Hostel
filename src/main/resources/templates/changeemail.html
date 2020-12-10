@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="blocks/heads :: heads"></head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
+
+<div class="row column">
+    <form method="post" th:object="${user}">
+        <p th:text="${message}"></p>
+        <input type="email" name="email" placeholder="Введите новый email">
+        <input type="email" name="emailAgain" placeholder="Введите новый email еще раз">
+        <button type="submit" class="button">Изменить email</button>
+        <a style="float: right" class="button" href="/profile">Отмена</a>
+    </form>
+</div>
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<div th:insert="blocks/scripts :: scripts"></div>
+</body>
+</html>
+

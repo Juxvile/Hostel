@@ -69,7 +69,7 @@ public class UserService  implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(username);
         if (user == null){
             throw new UsernameNotFoundException("User not found");
         }
@@ -101,5 +101,55 @@ public class UserService  implements UserDetailsService {
     public void deleteUser(@PathVariable(value = "id") long id){
         User user = userRepository.findById(id);
         userRepository.delete(user);
+    }
+
+
+    public Map<String, String> changeUsername(String username, String usernameAgain, User user) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        if(username.isEmpty()) {
+            errorMap.put("message", "Имя не должно быть пустым");
+        }
+        if(!username.equals(usernameAgain)) {
+            errorMap.put("message", "Имена не совпадают");
+        }
+        if(errorMap.isEmpty()) {
+            user.setUsername(username);
+            userRepository.save(user);
+        }
+        return errorMap;
+    }
+
+
+    public Map<String, String> changePhoneNumber(String phoneNumber, String phoneNumberAgain, User user) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        if(phoneNumber.isEmpty()) {
+            errorMap.put("message", "Телефон не должен быть пустым");
+        }
+        if(!phoneNumber.equals(phoneNumberAgain)) {
+            errorMap.put("message", "Номера не совпадают");
+        }
+        if(errorMap.isEmpty()) {
+            user.setPhoneNumber(phoneNumber);
+            userRepository.save(user);
+        }
+        return errorMap;
+    }
+
+    public Map<String, String> changeEmail(String email, String emailAgain, User user) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        if(email.isEmpty()) {
+            errorMap.put("message", "Email не должен быть пустым");
+        }
+        if(!email.equals(emailAgain)) {
+            errorMap.put("message", "Email не совпадают");
+        }
+        if(errorMap.isEmpty()) {
+            user.setEmail(email);
+            userRepository.save(user);
+        }
+        return errorMap;
     }
 }

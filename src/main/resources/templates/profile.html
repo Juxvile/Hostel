@@ -8,15 +8,15 @@
 
 <div class="row column">
     <div class="cell" th:each="users : ${user}">
-        <label>Ваш никнейм</label>
+        <label>Ваш никнейм<a style="float: right" href="/profile/changeusername">Изменить</a></label>
         <div class="panel callout radius">
-        <p th:text="${user.username}"></p>
+            <p th:text="${user.username}"></p>
         </div>
-        <label>Ваш телефон</label>
+        <label>Ваш телефон<a style="float: right" href="/profile/changephonenumber">Изменить</a></label>
         <div class="panel callout radius">
             <p th:text="${user.phoneNumber}"></p>
         </div>
-        <label>Ваш email</label>
+        <label>Ваш email<a style="float: right" href="/profile/changeemail">Изменить</a></label>
         <div class="panel callout radius">
             <p th:text="${user.email}"></p>
         </div>

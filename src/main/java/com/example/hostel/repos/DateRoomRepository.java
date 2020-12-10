@@ -1,7 +1,6 @@
 package com.example.hostel.repos;
 
 import com.example.hostel.domain.DateRoom;
-import com.example.hostel.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +16,4 @@ public interface DateRoomRepository extends JpaRepository <DateRoom, Long> {
             @Param("leaveDate") LocalDate leaveDate
     );
 
-    DateRoom findByUserId (long id);
 }

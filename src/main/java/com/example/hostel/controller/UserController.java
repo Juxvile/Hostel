@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +65,6 @@ public class UserController {
         List <DateRoom> dateRooms = dateRoomService.dateRooms();
         model.addAttribute("users", users);
         model.addAttribute("dateRooms", dateRooms);
-        model.addAttribute("message1", "");
         return "listofusers";
     }
 
@@ -74,5 +72,76 @@ public class UserController {
     public String deleteUser(@PathVariable(value = "id") long id){
             userService.deleteUser(id);
             return "redirect:/listofusers";
+    }
+
+    @GetMapping("/profile/changeusername")
+    public String changeUsername(@AuthenticationPrincipal User user,
+                                 Model model){
+        model.addAttribute("user", user);
+        return "changeusername";
+    }
+    @GetMapping("/profile/changephonenumber")
+    public String changePhoneNumber(@AuthenticationPrincipal User user,
+                                 Model model){
+        model.addAttribute("user", user);
+        return "changephonenumber";
+    }
+    @GetMapping("/profile/changeemail")
+    public String changeEmail(@AuthenticationPrincipal User user,
+                                 Model model){
+        model.addAttribute("user", user);
+        return "changeemail";
+    }
+
+
+    @PostMapping("/profile/changeusername")
+    public String changeName(@RequestParam(name = "username",defaultValue = "") String username,
+                             @RequestParam(name = "usernameAgain",defaultValue = "") String usernameAgain,
+                             @AuthenticationPrincipal User user,
+                             Model model){
+        Map <String, String> usernameErrors = userService.changeUsername(username, usernameAgain, user);
+        if (usernameErrors.isEmpty()){
+            return "redirect:/profile";
+        } else {
+            model.mergeAttributes(usernameErrors);
+            model.addAttribute("username", username);
+            model.addAttribute("message", usernameErrors.values());
+            model.addAttribute("usernameAgain", usernameAgain);
+            return "changeusername";
+        }
+    }
+
+    @PostMapping("/profile/changephonenumber")
+    public String changePhoneNumber(@RequestParam(name = "phoneNumber",defaultValue = "") String phoneNumber,
+                             @RequestParam(name = "phoneNumberAgain",defaultValue = "") String phoneNumberAgain,
+                             @AuthenticationPrincipal User user,
+                             Model model){
+        Map <String, String> phoneNumberErrors = userService.changePhoneNumber(phoneNumber, phoneNumberAgain, user);
+        if (phoneNumberErrors.isEmpty()){
+            return "redirect:/profile";
+        } else {
+            model.mergeAttributes(phoneNumberErrors);
+            model.addAttribute("phoneNumber", phoneNumber);
+            model.addAttribute("message", phoneNumberErrors.values());
+            model.addAttribute("phoneNumberAgain", phoneNumberAgain);
+            return "changephonenumber";
+        }
+    }
+
+    @PostMapping("/profile/changeemail")
+    public String changeEmail(@RequestParam(name = "email",defaultValue = "") String email,
+                                    @RequestParam(name = "emailAgain",defaultValue = "") String emailAgain,
+                                    @AuthenticationPrincipal User user,
+                                    Model model){
+        Map <String, String> emailErrors = userService.changeEmail(email, emailAgain, user);
+        if (emailErrors.isEmpty()){
+            return "redirect:/profile";
+        } else {
+            model.mergeAttributes(emailErrors);
+            model.addAttribute("email", email);
+            model.addAttribute("message", emailErrors.values());
+            model.addAttribute("emailAgain", emailAgain);
+            return "changeemail";
+        }
     }
 }
