@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,5 +25,11 @@ public class RoomService {
 //    public void deleteRoom(@PathVariable(value = "id") long id){
 //        Room room = roomRepository.findById(id);
 //        roomRepository.delete(room);
+//    }
+//    public List<Room> findAllRooms() {
+//    Iterable<Room> rooms = roomRepository.findAll();
+//    List <Room> roomList = new ArrayList<>();
+//    rooms.forEach(roomList::add);
+//    return roomList;
 //    }
 }

@@ -69,7 +69,7 @@ public class UserService  implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException("User not found");
         }
@@ -113,8 +113,12 @@ public class UserService  implements UserDetailsService {
         if(!username.equals(usernameAgain)) {
             errorMap.put("message", "Имена не совпадают");
         }
+        if(userRepository.findByUsername(username) != null) {
+            errorMap.put("message", "Такое имя уже есть");
+        }
         if(errorMap.isEmpty()) {
             user.setUsername(username);
+//            saveNewUser(user);
             userRepository.save(user);
         }
         return errorMap;
@@ -129,6 +133,9 @@ public class UserService  implements UserDetailsService {
         }
         if(!phoneNumber.equals(phoneNumberAgain)) {
             errorMap.put("message", "Номера не совпадают");
+        }
+        if(userRepository.findByPhoneNumber(phoneNumber) != null) {
+            errorMap.put("message", "Такое номер уже есть");
         }
         if(errorMap.isEmpty()) {
             user.setPhoneNumber(phoneNumber);
@@ -145,6 +152,9 @@ public class UserService  implements UserDetailsService {
         }
         if(!email.equals(emailAgain)) {
             errorMap.put("message", "Email не совпадают");
+        }
+        if(userRepository.findByEmail(email) != null) {
+            errorMap.put("message", "Такое email уже есть");
         }
         if(errorMap.isEmpty()) {
             user.setEmail(email);
