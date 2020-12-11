@@ -13,7 +13,7 @@
             <img class="numberImage thumbnail" th:src="@{|/static/img/${room.filename2}|}">
             <img class="numberImage thumbnail" th:src="@{|/static/img/${room.filename3}|}">
         </a>
-        <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$'"></h6>
+        <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$ в сутки'"></h6>
         <p th:text="${room.description}"></p>
         <a th:value="${room}" th:href="@{|/numbers/${room.id}|}" class="button hollow tiny expanded">Посмотреть</a>
     </div>

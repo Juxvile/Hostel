@@ -118,7 +118,6 @@ public class UserService  implements UserDetailsService {
         }
         if(errorMap.isEmpty()) {
             user.setUsername(username);
-//            saveNewUser(user);
             userRepository.save(user);
         }
         return errorMap;
@@ -158,7 +157,11 @@ public class UserService  implements UserDetailsService {
         }
         if(errorMap.isEmpty()) {
             user.setEmail(email);
+            user.setActivationCode(UUID.randomUUID().toString());
+            user.setActive(false);
             userRepository.save(user);
+            sendMessage(user);
+            errorMap.put("message", "На вашу почту отправлено письмо с активацией");
         }
         return errorMap;
     }
