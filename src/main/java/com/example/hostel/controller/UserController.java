@@ -144,4 +144,19 @@ public class UserController {
             return "changeemail";
         }
     }
+
+//    @GetMapping("/profile/avatar")
+//    public String avatar (@AuthenticationPrincipal User user,
+//                          Model model){
+//        model.addAttribute("user", user);
+//        return "avatar";
+//    }
+//
+//    @GetMapping("/profile/avatar")
+//    public String addAvatar (@RequestParam(name = "avatar",defaultValue = "") String avatar,
+//                             @AuthenticationPrincipal User user,
+//                             Model model){
+//        model.addAttribute("user", user);
+//        return "avatar";
+//    }
 }
