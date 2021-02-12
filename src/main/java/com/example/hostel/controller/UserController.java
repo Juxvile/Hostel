@@ -43,7 +43,7 @@ public class UserController {
         model.addAttribute("users", users);
         return "login";
     }
-
+    
     @PostMapping("/login")
     public String logUser(@RequestParam String username,
                           @RequestParam String password,
