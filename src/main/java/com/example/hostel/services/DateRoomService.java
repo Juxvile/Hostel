@@ -22,6 +22,7 @@ public class DateRoomService {
     }
 
     public boolean reserveRoom(DateRoom dateRoom, User user, Room room){
+        dateRoom.setId(null); // костыль, но работает
         dateRoom.setUser(user);
         dateRoom.setRoom(room);
         boolean datesEmpty = dateRoomRepository.findAllBetweenDates(dateRoom.getEntryDate(), dateRoom.getLeaveDate()).isEmpty();

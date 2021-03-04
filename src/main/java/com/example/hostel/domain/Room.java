@@ -46,6 +46,8 @@ public class Room {
 
     private String filename5;
 
+    private Status status;
+
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")

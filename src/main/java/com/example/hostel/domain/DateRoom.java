@@ -38,7 +38,6 @@ public class DateRoom {
     private String comment;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
