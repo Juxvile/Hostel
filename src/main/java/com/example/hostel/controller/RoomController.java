@@ -27,7 +27,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping(value = "/numbers")
 @RequiredArgsConstructor
-public class NumberController {
+public class RoomController {
 
     public final RoomRepository roomRepository;
     public final RoomService roomService;
