@@ -2,6 +2,7 @@ package com.example.hostel.services;
 
 import com.example.hostel.domain.Room;
 import com.example.hostel.domain.Status;
+import com.example.hostel.domain.User;
 import com.example.hostel.repos.DateRoomRepository;
 import com.example.hostel.repos.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class RoomService {
     public List<Room> findAllRoom() {
         return roomRepository.findAll();
     }
+
 
 
 //    public void deleteRoom(@PathVariable(value = "id") long id){

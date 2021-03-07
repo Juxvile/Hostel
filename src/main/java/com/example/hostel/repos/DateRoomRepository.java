@@ -16,4 +16,6 @@ public interface DateRoomRepository extends JpaRepository <DateRoom, Long> {
             @Param("leaveDate") LocalDate leaveDate
     );
 
+    List <DateRoom> findUserById (Long id);
+
 }

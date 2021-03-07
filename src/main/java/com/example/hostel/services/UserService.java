@@ -1,9 +1,9 @@
 package com.example.hostel.services;
 
-import com.example.hostel.domain.Role;
-import com.example.hostel.domain.User;
+import com.example.hostel.domain.*;
 import com.example.hostel.repos.DateRoomRepository;
 import com.example.hostel.repos.ReviewsRepository;
+import com.example.hostel.repos.RoomRepository;
 import com.example.hostel.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -25,6 +26,7 @@ public class UserService  implements UserDetailsService {
     public final MailSenderService mailSenderService;
     public final DateRoomRepository dateRoomRepository;
     public final ReviewsRepository reviewsRepository;
+    public final RoomRepository roomRepository;
 
     public void addUser(User user) {
         user.setRoles(Collections.singleton(Role.USER));
@@ -100,8 +102,16 @@ public class UserService  implements UserDetailsService {
         userRepository.save(user);
     }
 
-
+    @Transactional
     public void deleteUser(@PathVariable(value = "id") long id){
+        List<Reviews> reviewsList = reviewsRepository.findUserById(id);
+        for (Reviews reviews : reviewsList){
+            reviewsRepository.delete(reviews);
+        }
+        List<DateRoom> dateRoomsList = dateRoomRepository.findUserById(id);
+        for (DateRoom dateRoom : dateRoomsList){
+            dateRoomRepository.delete(dateRoom);
+        }
         User user = userRepository.findById(id);
         userRepository.delete(user);
     }

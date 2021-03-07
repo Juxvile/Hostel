@@ -21,6 +21,10 @@ public class DateRoomService {
         return dateRoomRepository.findAll();
     }
 
+    public List<DateRoom> findByUserId(User user){
+        return dateRoomRepository.findUserById(user.getId());
+    }
+
     public boolean reserveRoom(DateRoom dateRoom, User user, Room room){
         dateRoom.setId(null); // костыль, но работает
         dateRoom.setUser(user);
