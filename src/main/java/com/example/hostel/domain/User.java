@@ -49,7 +49,6 @@ public class User implements UserDetails{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set <DateRoom> dateRoom;
 
