@@ -2,6 +2,8 @@ package com.example.hostel.services;
 
 import com.example.hostel.domain.Role;
 import com.example.hostel.domain.User;
+import com.example.hostel.repos.DateRoomRepository;
+import com.example.hostel.repos.ReviewsRepository;
 import com.example.hostel.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,8 @@ public class UserService  implements UserDetailsService {
     public final PasswordEncoder passwordEncoder;
     public final UserRepository userRepository;
     public final MailSenderService mailSenderService;
+    public final DateRoomRepository dateRoomRepository;
+    public final ReviewsRepository reviewsRepository;
 
     public void addUser(User user) {
         user.setRoles(Collections.singleton(Role.USER));
