@@ -119,7 +119,7 @@ public class RoomController {
     }
 
     @PostMapping("/numbers/{id}/remove")
-    public String deleteUser(@PathVariable(value = "id") long id){
+    public String deleteRoom(@PathVariable(value = "id") long id){
         roomService.deleteRoom(id);
         return "redirect:/numbers";
     }

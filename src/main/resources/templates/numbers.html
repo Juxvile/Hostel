@@ -7,7 +7,7 @@
 <div class="row columns" th:insert="blocks/upnav :: upnav"></div>
 
 <div class="row column">
-    <div class="cell" th:each="room : ${numbers}">
+    <div class="cell" th:each="room : ${numbers}" th:name="${room}">
         <a th:href="@{|/numbers/${room.id}|}">
             <img class="numberImage thumbnail" th:src="@{|/static/img/${room.filename}|}">
             <img class="numberImage thumbnail" th:src="@{|/static/img/${room.filename2}|}">
@@ -16,6 +16,11 @@
         <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$ в сутки'"></h6>
         <p th:text="${room.description}"></p>
         <a th:value="${room}" th:href="@{|/numbers/${room.id}|}" class="button hollow tiny expanded">Посмотреть</a>
+        <form method="post" th:action="'/numbers/' + ${room.id} + '/remove'">
+            <button type="submit" class="button" style="float: right">
+                Удалить номер
+            </button>
+        </form>
     </div>
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>

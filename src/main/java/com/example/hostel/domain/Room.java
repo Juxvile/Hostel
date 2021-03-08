@@ -50,11 +50,11 @@ public class Room {
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <Reviews> reviews;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <DateRoom> dateRoom;
 
 }
