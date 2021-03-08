@@ -1,6 +1,7 @@
 package com.example.hostel.repos;
 
 import com.example.hostel.domain.DateRoom;
+import com.example.hostel.domain.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +18,5 @@ public interface DateRoomRepository extends JpaRepository <DateRoom, Long> {
     );
 
     List<DateRoom> findUserById(Long id);
-    List<DateRoom> findByRoomId (Long id);
+    List<DateRoom> findByRoomId(Long room_id);
 }

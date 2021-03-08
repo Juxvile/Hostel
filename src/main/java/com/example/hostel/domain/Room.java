@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @NotNull
@@ -50,11 +50,11 @@ public class Room {
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room",cascade = CascadeType.REMOVE)
     private Set <Reviews> reviews;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room",cascade = CascadeType.REMOVE)
     private Set <DateRoom> dateRoom;
 
 }

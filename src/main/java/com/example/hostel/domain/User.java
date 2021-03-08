@@ -24,7 +24,7 @@ import java.util.Set;
 @UniqueUsername(message = "Такое имя уже есть")
 public class User implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
     @NotBlank
@@ -49,10 +49,10 @@ public class User implements UserDetails{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.REMOVE)
     private Set <DateRoom> dateRoom;
 
-    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "user",cascade = CascadeType.REMOVE)
     private Set <Reviews> reviews;
 
     @Override

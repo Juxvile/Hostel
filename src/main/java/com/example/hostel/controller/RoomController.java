@@ -139,7 +139,7 @@ public class RoomController {
                 model.addAttribute("user", user);
                 model.addAttribute("reviews", reviewsService.findByRoom(room));
                 model.addAttribute("room", room);
-                model.addAttribute("message", "Введите корректную дату отьезда");
+                model.addAttribute("message", "Введите корректную дату отъезда");
                 return "room";
             } else if (!dateRoomService.reserveRoom(dateRoom, user, room)) {
                 model.addAttribute("dateRoom", dateRoom);
