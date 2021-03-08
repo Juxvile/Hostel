@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="blocks/heads :: heads"></head>
+<body>
+<div class="top-bar" th:insert="blocks/header :: header"></div>
+<br>
+<div class="row columns" th:insert="blocks/upnav :: upnav"></div>
+
+<div class="row column" th:each="room : ${rooms}" th:name="${room}">
+    <div class="panel callout radius" style="border: 3px solid aquamarine">
+        <label>
+            <p>Id номера</p>
+        </label>
+        <p class="panel callout radius" th:text="${room.id}"></p>
+        <label>
+            <p>№</p>
+        </label>
+        <p class="panel callout radius" th:text="${room.roomNumber}"></p>
+        <label>
+            <p>Описание</p>
+        </label>
+        <p class="panel callout radius" th:text="${room.description}"></p>
+        <label>
+            <p>Цена</p>
+        </label>
+        <p class="panel callout radius" th:text="${room.price}"></p>
+        <label>
+            <p>Количество человек</p>
+        </label>
+        <p class="panel callout radius" th:text="${room.maxPeople}"></p>
+        <form method="post" sec:authorize="hasAuthority('ADMIN')" th:action="${room.id} + '/remove'">
+            <button type="submit" class="button" style="float: right">
+                Удалить номер
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row column" th:insert="blocks/downnav :: downnav"></div>
+
+<div th:insert="blocks/scripts :: scripts"></div>
+</body>
+</html>

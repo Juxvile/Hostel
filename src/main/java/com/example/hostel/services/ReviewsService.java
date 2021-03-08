@@ -5,6 +5,7 @@ import com.example.hostel.domain.Room;
 import com.example.hostel.domain.User;
 import com.example.hostel.repos.ReviewsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public class ReviewsService {
     }
     public List <Reviews> findUserById (User user){
         return reviewsRepository.findUserById(user.getId());
+    }
+    @Scheduled(fixedDelay = 1000L)
+    public void sch (){
+        System.out.println("Scheduled");
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="blocks/heads :: heads"></head>
 <body>
 <div class="top-bar" th:insert="blocks/header :: header"></div>
@@ -16,11 +16,6 @@
         <h5 th:text="'Номер №' + ${room.roomNumber}"></h5><h6 style="opacity: 50%" th:text="${room.price} + '$ в сутки'"></h6>
         <p th:text="${room.description}"></p>
         <a th:value="${room}" th:href="@{|/numbers/${room.id}|}" class="button hollow tiny expanded">Посмотреть</a>
-        <form method="post" th:action="'/numbers/' + ${room.id} + '/remove'">
-            <button type="submit" class="button" style="float: right">
-                Удалить номер
-            </button>
-        </form>
     </div>
 </div>
 <div class="row column" th:insert="blocks/downnav :: downnav"></div>
