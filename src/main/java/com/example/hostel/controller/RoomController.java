@@ -118,6 +118,13 @@ public class RoomController {
         return "redirect:/numbers/" + reviews.getRoom().getId();
     }
 
+    @PostMapping("/numbers/{id}/remove")
+    public String deleteUser(@PathVariable(value = "id") long id){
+        roomService.deleteRoom(id);
+        return "redirect:/numbers";
+    }
+
+
     @PostMapping("{id}")
     public String roomReserve(
             @Valid DateRoom dateRoom,

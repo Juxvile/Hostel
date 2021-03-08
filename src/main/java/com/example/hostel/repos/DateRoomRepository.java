@@ -19,4 +19,6 @@ public interface DateRoomRepository extends JpaRepository <DateRoom, Long> {
 
     List<DateRoom> findUserById(Long id);
     List<DateRoom> findByRoomId(Long room_id);
+
+    List<DateRoom> findRoomById(long id);
 }
