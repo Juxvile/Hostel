@@ -27,8 +27,4 @@ public class ReviewsService {
     public List <Reviews> findUserById (User user){
         return reviewsRepository.findUserById(user.getId());
     }
-    @Scheduled(fixedDelay = 1000L)
-    public void sch (){
-        System.out.println("Scheduled");
-    }
 }
