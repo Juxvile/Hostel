@@ -27,12 +27,13 @@ public class UserController {
     public final UserService userService;
     public final DateRoomService dateRoomService;
     public final DateRoomRepository dateRoomRepository;
+//    public final StorageService storageService;
 
     @GetMapping("/profile")
-    public String profile (
+    public String profile(
             @AuthenticationPrincipal User user,
-            Model model){
-        model.addAttribute("user",user);
+            Model model) {
+        model.addAttribute("user", user);
         return "profile";
     }
 
@@ -43,7 +44,7 @@ public class UserController {
         model.addAttribute("users", users);
         return "login";
     }
-    
+
     @PostMapping("/login")
     public String logUser(@RequestParam String username,
                           @RequestParam String password,
@@ -60,47 +61,49 @@ public class UserController {
     }
 
     @GetMapping("/listofusers")
-    public String listOfUsers(Model model){
-        List <User> users = userService.users();
-        List <DateRoom> dateRooms = dateRoomService.dateRooms();
+    public String listOfUsers(Model model) {
+        List<User> users = userService.users();
+        List<DateRoom> dateRooms = dateRoomService.dateRooms();
         model.addAttribute("users", users);
         model.addAttribute("dateRooms", dateRooms);
         return "listofusers";
     }
 
     @PostMapping("/listofusers/{id}/remove")
-    public String deleteUser(@PathVariable(value = "id") long id){
-            userService.deleteUser(id);
-            return "redirect:/listofusers";
+    public String deleteUser(@PathVariable(value = "id") long id) {
+        userService.deleteUser(id);
+        return "redirect:/listofusers";
     }
 
     @GetMapping("/profile/changeusername")
     public String changeUsername(@AuthenticationPrincipal User user,
-                                 Model model){
+                                 Model model) {
         model.addAttribute("user", user);
         return "changeusername";
     }
+
     @GetMapping("/profile/changephonenumber")
     public String changePhoneNumber(@AuthenticationPrincipal User user,
-                                 Model model){
+                                    Model model) {
         model.addAttribute("user", user);
         return "changephonenumber";
     }
+
     @GetMapping("/profile/changeemail")
     public String changeEmail(@AuthenticationPrincipal User user,
-                                 Model model){
+                              Model model) {
         model.addAttribute("user", user);
         return "changeemail";
     }
 
 
     @PostMapping("/profile/changeusername")
-    public String changeName(@RequestParam(name = "username",defaultValue = "") String username,
-                             @RequestParam(name = "usernameAgain",defaultValue = "") String usernameAgain,
+    public String changeName(@RequestParam(name = "username", defaultValue = "") String username,
+                             @RequestParam(name = "usernameAgain", defaultValue = "") String usernameAgain,
                              @AuthenticationPrincipal User user,
-                             Model model){
-        Map <String, String> usernameErrors = userService.changeUsername(username, usernameAgain, user);
-        if (usernameErrors.isEmpty()){
+                             Model model) {
+        Map<String, String> usernameErrors = userService.changeUsername(username, usernameAgain, user);
+        if (usernameErrors.isEmpty()) {
             return "redirect:/profile";
         } else {
             model.mergeAttributes(usernameErrors);
@@ -112,12 +115,12 @@ public class UserController {
     }
 
     @PostMapping("/profile/changephonenumber")
-    public String changePhoneNumber(@RequestParam(name = "phoneNumber",defaultValue = "") String phoneNumber,
-                             @RequestParam(name = "phoneNumberAgain",defaultValue = "") String phoneNumberAgain,
-                             @AuthenticationPrincipal User user,
-                             Model model){
-        Map <String, String> phoneNumberErrors = userService.changePhoneNumber(phoneNumber, phoneNumberAgain, user);
-        if (phoneNumberErrors.isEmpty()){
+    public String changePhoneNumber(@RequestParam(name = "phoneNumber", defaultValue = "") String phoneNumber,
+                                    @RequestParam(name = "phoneNumberAgain", defaultValue = "") String phoneNumberAgain,
+                                    @AuthenticationPrincipal User user,
+                                    Model model) {
+        Map<String, String> phoneNumberErrors = userService.changePhoneNumber(phoneNumber, phoneNumberAgain, user);
+        if (phoneNumberErrors.isEmpty()) {
             return "redirect:/profile";
         } else {
             model.mergeAttributes(phoneNumberErrors);
@@ -129,12 +132,12 @@ public class UserController {
     }
 
     @PostMapping("/profile/changeemail")
-    public String changeEmail(@RequestParam(name = "email",defaultValue = "") String email,
-                                    @RequestParam(name = "emailAgain",defaultValue = "") String emailAgain,
-                                    @AuthenticationPrincipal User user,
-                                    Model model){
-        Map <String, String> emailErrors = userService.changeEmail(email, emailAgain, user);
-        if (emailErrors.isEmpty()){
+    public String changeEmail(@RequestParam(name = "email", defaultValue = "") String email,
+                              @RequestParam(name = "emailAgain", defaultValue = "") String emailAgain,
+                              @AuthenticationPrincipal User user,
+                              Model model) {
+        Map<String, String> emailErrors = userService.changeEmail(email, emailAgain, user);
+        if (emailErrors.isEmpty()) {
             return "redirect:/profile";
         } else {
             model.mergeAttributes(emailErrors);
@@ -145,18 +148,11 @@ public class UserController {
         }
     }
 
-//    @GetMapping("/profile/avatar")
-//    public String avatar (@AuthenticationPrincipal User user,
-//                          Model model){
-//        model.addAttribute("user", user);
-//        return "avatar";
-//    }
-//
-//    @GetMapping("/profile/avatar")
-//    public String addAvatar (@RequestParam(name = "avatar",defaultValue = "") String avatar,
-//                             @AuthenticationPrincipal User user,
-//                             Model model){
-//        model.addAttribute("user", user);
-//        return "avatar";
+//    @PostMapping("/profile")
+//    public String uploadAvatar(@RequestParam("file") MultipartFile file,
+//                               RedirectAttributes redirectAttributes) {
+//        storageService.store(file);
+//        redirectAttributes.addFlashAttribute("message", "Аватар успешно загружен" + file.getOriginalFilename() + "!");
+//        return "redirect:/profile";
 //    }
 }
