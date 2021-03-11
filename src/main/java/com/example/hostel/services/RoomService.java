@@ -25,16 +25,11 @@ public class RoomService {
     public final UserRepository userRepository;
 
 
-    @Cacheable(cacheNames = "roomsCache", key = "room.id")
     public void saveRoom (Room room){
-        try {
-            TimeUnit.SECONDS.sleep(3);
-            roomRepository.save(room);
-        } catch (InterruptedException e){
-            throw new RuntimeException(e);
-        }
+        roomRepository.save(room);
     }
 
+    @Cacheable(cacheNames = "roomsCache", key = "#room")
     public List<Room> findAllRoom() {
         return roomRepository.findAll();
     }
