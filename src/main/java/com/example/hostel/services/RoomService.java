@@ -8,11 +8,13 @@ import com.example.hostel.repos.ReviewsRepository;
 import com.example.hostel.repos.RoomRepository;
 import com.example.hostel.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +24,15 @@ public class RoomService {
     public final ReviewsRepository reviewsRepository;
     public final UserRepository userRepository;
 
+
+    @Cacheable(cacheNames = "roomsCache", key = "room.id")
     public void saveRoom (Room room){
-        roomRepository.save(room);
+        try {
+            TimeUnit.SECONDS.sleep(3);
+            roomRepository.save(room);
+        } catch (InterruptedException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Room> findAllRoom() {
