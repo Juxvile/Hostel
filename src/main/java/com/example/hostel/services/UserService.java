@@ -6,6 +6,7 @@ import com.example.hostel.repos.ReviewsRepository;
 import com.example.hostel.repos.RoomRepository;
 import com.example.hostel.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -68,6 +69,7 @@ public class UserService  implements UserDetailsService {
         }
     }
 
+    @Cacheable("allUsersCache")
     public List<User> users(){
         return userRepository.findAll();
     }
