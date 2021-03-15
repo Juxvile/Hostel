@@ -69,6 +69,7 @@ public class UserService  implements UserDetailsService {
         }
     }
 
+
     @Cacheable("allUsersCache")
     public List<User> users(){
         return userRepository.findAll();
