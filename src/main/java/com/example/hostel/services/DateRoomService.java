@@ -7,6 +7,7 @@ import com.example.hostel.domain.User;
 import com.example.hostel.repos.DateRoomRepository;
 import com.example.hostel.repos.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,11 @@ public class DateRoomService {
     public final DateRoomRepository dateRoomRepository;
     public final RoomRepository roomRepository;
 
-
+    @Cacheable("allDateRoomsCache")
     public List<DateRoom> dateRooms() {
         return dateRoomRepository.findAll();
     }
-
+    @Cacheable("roomByIdCache")
     public List<DateRoom> findByRoomId(Long room_id) {
         return dateRoomRepository.findByRoomId(room_id);
     }
