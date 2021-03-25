@@ -133,7 +133,18 @@
 			<version>4.5.3</version>
 		</dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>com.wavefront</groupId>
+			<artifactId>wavefront-spring-boot-starter</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-spring-cloud-starter</artifactId>
+			<version>0.5.9</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
