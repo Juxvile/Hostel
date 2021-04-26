@@ -8,16 +8,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: hotel
       PGDATA: /var/lib/postgresql/data/pgdata
-    restart: always
     volumes:
     - ./pg_data:/var/lib/postgresql/data/pgdata
     ports:
-    - 5431:5432
+    - 5432
   app:
     container_name: hotel
-    build: ./
-    restart: always
-    command: ./hotel
     image: juxvile/firstimage
     environment:
       - spring.datasource.url=jdbc:postgresql://db:5432/hotel
@@ -27,4 +23,4 @@ services:
     depends_on:
       - db
     ports:
-    - 8081:8082
+    - 8082
