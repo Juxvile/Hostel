@@ -20,7 +20,10 @@ services:
     command: ./hotel
     image: hotel
     environment:
-      POSTGRES_HOST: db
+      - spring.datasource.url=jdbc:postgresql://db:5432/hotel
+      - spring.datasource.username=postgres
+      - spring.datasource.password=postgres
+      - spring.profiles.active=postgres
     depends_on:
       - db
     ports:
