@@ -11,6 +11,7 @@ import com.example.hostel.services.ReviewsService;
 import com.example.hostel.services.RoomService;
 import com.example.hostel.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -90,7 +91,7 @@ public class RoomController {
             return "redirect:/numbers";
         }
     }
-
+   
     @GetMapping
     public String numbers(Model model) {
         model.addAttribute("numbers", roomService.findAllRoom());

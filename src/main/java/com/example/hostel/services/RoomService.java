@@ -24,7 +24,6 @@ public class RoomService {
     public final ReviewsRepository reviewsRepository;
     public final UserRepository userRepository;
 
-
     public void saveRoom (Room room){
         roomRepository.save(room);
     }

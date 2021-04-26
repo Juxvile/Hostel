@@ -21,7 +21,7 @@ public class ConsoleService {
     public final UserRepository userRepository;
 
     @Scheduled(fixedDelay = 60000L)
-    public void statistics (){
+    public void statistics () throws NoSuchFieldException {
         int countOfReservation = 0;
         int countOfRooms = 0;
         int countOfUsers = 0;

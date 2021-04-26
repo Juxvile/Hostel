@@ -47,12 +47,9 @@ public class Room {
     private String filename5;
 
     private Status status;
-
-
-
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <Reviews> reviews;
-
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private Set <DateRoom> dateRoom;

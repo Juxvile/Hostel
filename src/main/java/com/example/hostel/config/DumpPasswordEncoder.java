@@ -13,4 +13,5 @@ public class DumpPasswordEncoder implements PasswordEncoder {
     public boolean matches(CharSequence charSequence, String s) {
         return false;
     }
+    
 }
