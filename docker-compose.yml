@@ -18,7 +18,7 @@ services:
     build: ./
     restart: always
     command: ./hotel
-    image: hotel
+    image: juxvile/firstimage
     environment:
       - spring.datasource.url=jdbc:postgresql://db:5432/hotel
       - spring.datasource.username=postgres
