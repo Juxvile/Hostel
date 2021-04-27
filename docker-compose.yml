@@ -14,7 +14,7 @@ services:
     - 5432:5432
   app:
     container_name: hotel
-    image: juxvile/firstimage
+    image: hotel
     environment:
       - spring.datasource.url=jdbc:postgresql://db:5432/hotel
       - spring.datasource.username=postgres
