@@ -14,7 +14,6 @@ services:
     - 5432:5432
   app:
     container_name: hotel
-    image: hotel
     build:
       context: ./
       dockerfile: Dockerfile
