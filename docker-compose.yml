@@ -15,6 +15,9 @@ services:
   app:
     container_name: hotel
     image: hotel
+    build:
+      context: ./
+      dockerfile: Dockerfile
     environment:
       - spring.datasource.url=jdbc:postgresql://db:5432/hotel
       - spring.datasource.username=postgres
